@@ -45,24 +45,14 @@ public class BeerController {
         return new ResponseEntity<>(beerList, HttpStatus.OK);
     }
 
-<<<<<<< HEAD
-    @GetMapping("beer/{beerId}")
-    public ResponseEntity<BeerDto> getBeerById(@PathVariable("beerId") UUID beerId,
-                                               @RequestParam(value = "showInventoryOnHand", required = false) Boolean showInventoryOnHand){
-        if (showInventoryOnHand == null) {
-            showInventoryOnHand = false;
-        }
 
-        return new ResponseEntity<>(beerService.getById(beerId, showInventoryOnHand), HttpStatus.OK);
-=======
     @GetMapping("/{beerId}")
     public ResponseEntity<BeerDto> getBeerById(@PathVariable("beerId") UUID beerId){
         return new ResponseEntity<>(beerService.getById(beerId), HttpStatus.OK);
->>>>>>> parent of b1ac08e (adding showInventoryOnHand param - closes #20)
     }
 
     @GetMapping("beerUpc/{upc}")
-    public ResponseEntity<BeerDto> getBeerByUpc(@PathVariable("upc") String upc){
+    public ResponseEntity<BeerDto> getBeerByUpc(@PathVariable("upc") String upc) {
         return new ResponseEntity<>(beerService.getByUpc(upc), HttpStatus.OK);
     }
 

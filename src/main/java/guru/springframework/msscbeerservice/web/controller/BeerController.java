@@ -30,12 +30,7 @@ public class BeerController {
     public ResponseEntity<BeerPagedList> listBeers(@RequestParam(value = "pageNumber", required = false) Integer pageNumber,
                                                    @RequestParam(value = "pageSize", required = false) Integer pageSize,
                                                    @RequestParam(value = "beerName", required = false) String beerName,
-                                                   @RequestParam(value = "beerStyle", required = false) BeerStyleEnum beerStyle,
-                                                   @RequestParam(value = "showInventoryOnHand", required = false) Boolean showInventoryOnHand){
-
-        if (showInventoryOnHand == null) {
-            showInventoryOnHand = false;
-        }
+                                                   @RequestParam(value = "beerStyle", required = false) BeerStyleEnum beerStyle){
 
         if (pageNumber == null || pageNumber < 0){
             pageNumber = DEFAULT_PAGE_NUMBER;
@@ -45,11 +40,12 @@ public class BeerController {
             pageSize = DEFAULT_PAGE_SIZE;
         }
 
-        BeerPagedList beerList = beerService.listBeers(beerName, beerStyle, PageRequest.of(pageNumber, pageSize), showInventoryOnHand);
+        BeerPagedList beerList = beerService.listBeers(beerName, beerStyle, PageRequest.of(pageNumber, pageSize));
 
         return new ResponseEntity<>(beerList, HttpStatus.OK);
     }
 
+<<<<<<< HEAD
     @GetMapping("beer/{beerId}")
     public ResponseEntity<BeerDto> getBeerById(@PathVariable("beerId") UUID beerId,
                                                @RequestParam(value = "showInventoryOnHand", required = false) Boolean showInventoryOnHand){
@@ -58,6 +54,11 @@ public class BeerController {
         }
 
         return new ResponseEntity<>(beerService.getById(beerId, showInventoryOnHand), HttpStatus.OK);
+=======
+    @GetMapping("/{beerId}")
+    public ResponseEntity<BeerDto> getBeerById(@PathVariable("beerId") UUID beerId){
+        return new ResponseEntity<>(beerService.getById(beerId), HttpStatus.OK);
+>>>>>>> parent of b1ac08e (adding showInventoryOnHand param - closes #20)
     }
 
     @GetMapping("beerUpc/{upc}")
